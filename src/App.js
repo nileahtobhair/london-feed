@@ -21,6 +21,10 @@ class App extends Component {
     this.get_api_load_data();
   }
 
+  /* Function passed as props to reviews component. 
+   * Component allows user to click to view new reviews arriving on socket.
+   * Combines new and exsisting reviews to be displayed together
+   */
   show_more_reviews = () => {
     var combined_reviews = this.state.added_reviews.concat(this.state.reviews);
     this.setState({ reviews : combined_reviews,added_reviews : [] });
@@ -46,8 +50,8 @@ class App extends Component {
       main.setState({added_cats : gifs });
     });
   }
-
-  star(type,review){
+  /* Star ite, - function passed to sub components and called */
+  star(type,id){
     var main = this;
     fetch('http://127.0.0.1:5000/star', {
       method: 'POST',
@@ -57,7 +61,7 @@ class App extends Component {
       },
       body: JSON.stringify({
         data_type : type,
-        data_id:  review.id
+        data_id:  id
       })
     }).then((response) => response.json())
     .then((responseJson) => {
@@ -67,6 +71,7 @@ class App extends Component {
     })
   }
 
+  /* Get inital data from server - assign to state variable */
   get_api_load_data(){
     var main = this;
     fetch('http://127.0.0.1:5000/sync', {
@@ -75,23 +80,25 @@ class App extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       }
-      }).then((response) => response.json())
-        .then((responseJson) => {
-          main.setState({
-            reviews : (responseJson.reviews ?   responseJson.reviews  : []),
-            cats : (responseJson.gifs ?   responseJson.gifs  : []),
-            travel : (responseJson.travel ?   responseJson.travel  : [])
-          })
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+    }).then((response) => response.json())
+    .then((responseJson) => {
+      main.setState({
+        reviews : (responseJson.reviews ?   responseJson.reviews  : []),
+        cats : (responseJson.gifs ?   responseJson.gifs  : []),
+        travel : (responseJson.travel ?   responseJson.travel  : [])
+      })
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
+  /* Change current visible tab - managed as state variable */
   change_visible_tab (change_to){
     this.setState( {visible_tab : change_to });
   }
 
+  /* Render menu to toggle between tabs */
   _render_menu(){
     var update_active = this.state.visible_tab === 'updates' ? 'active' : '';
     var reviews_active = this.state.visible_tab === 'reviews' ? 'active' : '';
@@ -104,6 +111,8 @@ class App extends Component {
       </div>
     );
   }
+
+  /* Render common heading and relevant tab component specified in state variable */
   render() {
     var main = this;
     return (
@@ -116,10 +125,11 @@ class App extends Component {
          {this._render_menu() }
           { main.state.visible_tab === 'updates' ? 
               <Feed star={this.star} added={main.state.added_travel} data={main.state.travel}/>
-
           : main.state.visible_tab === 'reviews' ? 
-            <Reviews star={this.star} show_more={this.show_more_reviews} added={main.state.added_reviews} data={main.state.reviews}/> : 
-            <Cats star={this.star} added={main.state.added_cats} data={main.state.cats}/> }
+            <Reviews star={this.star} show_more={this.show_more_reviews} added={main.state.added_reviews} data={main.state.reviews}/>
+          : 
+            <Cats star={this.star} added={main.state.added_cats} data={main.state.cats}/> 
+          }
         </div>
       </div>
     );

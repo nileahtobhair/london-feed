@@ -68,7 +68,7 @@ ul{
 }
 .travel .added-update,
 .travel .update{
-	padding:20px 10px;
+	padding: 10px;
 	border-bottom:1px solid black;
 	overflow: auto;
 }
@@ -118,4 +118,10 @@ ul{
 	cursor:pointer;
 	color:#ccccff;
 	font-size:12px;
+}
+.star{
+	font-size:12px;
+	margin-top:5px;
+	cursor:pointer;
+	color:#e6e600;
 }

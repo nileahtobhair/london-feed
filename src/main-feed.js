@@ -15,12 +15,13 @@ class Feed extends Component {
               { moment(item.created_at).format("DD MMM YY") }
             </div>
             <div className='text'>{item.text}</div>
+            <div className='star' onClick={ (e) => this.props.star('travel',item.id)} > Star this item</div>
           </div> 
       </span>
     );
   }
-  
-  /* Map intital updated and updates gathered from socket streams separately.*/
+
+  /* Map intital updates and updates gathered from socket streams separately.*/
   render() {
     return (
       <div className="travel">
