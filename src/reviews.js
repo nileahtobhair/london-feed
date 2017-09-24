@@ -9,10 +9,16 @@ class reviews extends Component {
       show_more : false
     }
   }
+  show_added_reviews(){
+   // this.setState({show_more:true})
+    this.props.show_more();
+    //call parent function to move added to original.
+  }
 
   render() {
     return (
       <div className="review">
+        { this.state.show_more ?
         <ul>
          { this.props.added.map((item,index)=>{
           return (
@@ -31,11 +37,14 @@ class reviews extends Component {
           )
         })}
          </ul>
+        : <a onClick={ (e) => this.props.show_more()}>Show {this.props.added.length} more</a> }
 
         { this.props.data.map((item,index)=>{
           return (
             <div className='review-item' key={'item'+index}>
-              <img className='review-location-image' src={item.image_url} alt='review location' />
+              <div className='review-img-container'>
+                <img className='' src={item.image_url} alt='review location'/>
+              </div>
               <div className='review-data'>
                 <h4>{item.name}</h4>
                 <div>Rating <span> {item.rating}</span></div>

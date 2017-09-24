@@ -20,6 +20,11 @@ class App extends Component {
     }
   }
 
+  show_more_reviews = () => {
+    var combined_reviews = this.state.added_reviews.concat(this.state.reviews);
+    this.setState({ reviews : combined_reviews,added_reviews : [] });
+  }
+
   componentDidMount(){
     var main = this;
     travel_messages((err, load) => {
@@ -33,6 +38,8 @@ class App extends Component {
       main.setState({added_reviews : new_reviews })
      });
   }
+
+  
 
   get_api_load_data(){
     var main = this;
@@ -77,7 +84,7 @@ class App extends Component {
               <Feed added={main.state.added_travel} data={main.state.travel}/>
 
           : main.state.visible_tab === 'reviews' ? 
-            <Reviews added={main.state.added_reviews} data={main.state.reviews}/> : <Cats data={main.state.cats}/> }
+            <Reviews show_more={this.show_more_reviews} added={main.state.added_reviews} data={main.state.reviews}/> : <Cats data={main.state.cats}/> }
         </div>
       </div>
     );
