@@ -9,11 +9,6 @@ class reviews extends Component {
       show_more : false
     }
   }
-  show_added_reviews(){
-   // this.setState({show_more:true})
-    this.props.show_more();
-    //call parent function to move added to original.
-  }
 
   render() {
     return (
@@ -37,7 +32,13 @@ class reviews extends Component {
           )
         })}
          </ul>
-        : <a onClick={ (e) => this.props.show_more()}>Show {this.props.added.length} more</a> }
+        : 
+        <span>
+          { this.props.added.length > 0 ?
+            <a onClick={ (e) => this.props.show_more()}>Show {this.props.added.length} more</a> 
+          : null }
+        </span>
+        }
 
         { this.props.data.map((item,index)=>{
           return (

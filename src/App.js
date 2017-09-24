@@ -3,7 +3,7 @@ import logo from './skyline.png';
 import Feed from './main-feed.js';
 import Cats from './cats.js';
 import Reviews from './reviews.js';
-import { travel_messages , reviews } from './socket_handler.js';
+import { travel_messages , reviews, gifs } from './socket_handler.js';
 
 class App extends Component {
 
@@ -16,7 +16,8 @@ class App extends Component {
       added_travel : [],
       reviews : [],
       added_reviews : [],
-      cats : []
+      cats : [],
+      added_cats :[]
     }
   }
 
@@ -33,10 +34,14 @@ class App extends Component {
      });
 
     reviews((err, load) => {
-      console.log('received new reviews',load);
       var new_reviews = main.state.added_reviews; new_reviews.unshift(load.data);
       main.setState({added_reviews : new_reviews })
      });
+
+    gifs((err, load) => {
+      var new_gifs = main.state.added_cats; new_gifs.unshift(load.data);
+      main.setState({added_cats : new_gifs });
+    });
   }
 
   
@@ -84,7 +89,8 @@ class App extends Component {
               <Feed added={main.state.added_travel} data={main.state.travel}/>
 
           : main.state.visible_tab === 'reviews' ? 
-            <Reviews show_more={this.show_more_reviews} added={main.state.added_reviews} data={main.state.reviews}/> : <Cats data={main.state.cats}/> }
+            <Reviews show_more={this.show_more_reviews} added={main.state.added_reviews} data={main.state.reviews}/> : 
+            <Cats added={main.state.added_cats} data={main.state.cats}/> }
         </div>
       </div>
     );

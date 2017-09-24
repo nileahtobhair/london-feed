@@ -12,12 +12,20 @@ class cats extends Component {
   render() {
     return (
       <div className="gifs">
-        { this.props.data.map((item,index)=>{ 
-          return (
-            <img key={'cat'+index} src={item.gif_source} alt='a cat gif'/>
-          );
-        })  
-      }
+        { 
+          this.props.added.map((item,index)=>{ 
+            return (
+              <img key={'added-cat'+index} src={item.gif_source} alt='a cat gif'/>
+            );
+          })  
+       }
+        { 
+          this.props.data.map((item,index)=>{ 
+            return (
+              <img key={'cat'+index} src={item.gif_source} alt='a cat gif'/>
+            );
+          })  
+       }
       </div>
     );
   }
