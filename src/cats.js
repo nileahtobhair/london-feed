@@ -13,7 +13,6 @@ class cats extends Component {
     return (
       <div className="gifs">
         { this.props.data.map((item,index)=>{ 
-          console.log(item);
           return (
             <img key={'cat'+index} src={item.gif_source} alt='a cat gif'/>
           );
