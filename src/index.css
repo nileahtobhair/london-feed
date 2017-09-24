@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.App {
+  text-align: center;
+}
+
+.menu .tab{
+	cursor: pointer;
+	padding:10px;
+}
+.menu{
+	border-bottom:1px solid black;
+	display: flex;
+	width:70%;
+	margin:0 auto;
+}
+.review{
+	padding-top:20px;
+}
+.review-item{
+	overflow: auto;
+	width:70%;
+	margin:0 auto;
+}
+.review img{
+	max-width: 300px;
+	float:left;
+}
+
+.gifs img{
+	width:200px;
+	height:200px;
+}
+.travel{
+	width:70%;
+	margin: 0 auto;
+}
+.travel .added-update,
+.travel .update{
+	padding:20px 10px;
+	border-bottom:1px solid black;
+	overflow: auto;
+}
+.travel .update img{
+	float:left;
+}
+
+.travel li.added-update:nth-of-type(1),
+.travel li.added-update:nth-of-type(2){
+	background-color: #b3e0ff;
+}
+
+.travel .added-update img{
+	float:left;
+}
