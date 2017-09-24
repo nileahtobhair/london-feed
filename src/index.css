@@ -12,21 +12,28 @@ ul{
 
 .menu .tab{
 	cursor: pointer;
-	padding:10px;
+	padding:15px;
+	font-family: monospace;
 }
 .menu{
 	border-bottom:1px solid black;
 	display: flex;
+
 	width:70%;
 	margin:0 auto;
 }
 .review{
 	padding-top:20px;
+	width:70%;
+	margin:0 auto;
+}
+.review-data{
+	width:65%;
+	text-align:left;
+	float:right;
 }
 .review-item{
 	overflow: auto;
-	width:70%;
-	margin:0 auto;
 	margin-bottom:15px;
 }
 .review img{
@@ -43,9 +50,17 @@ ul{
 	height:225px;
 }
 
+.gifs{
+	width:70%;
+	margin:0 auto;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap : wrap;
+}
 .gifs img{
 	width:200px;
 	height:200px;
+	margin-bottom:10px;
 }
 .travel{
 	width:70%;
@@ -85,4 +100,22 @@ ul{
 
 .travel .added-update img{
 	float:left;
+}
+
+.menu .tab.active{
+	background-color : #4d4d4d;
+	font-size:20px;
+	color:#fff;
+	padding:10px;
+}
+.show-more:hover{
+	background : #f5f8fa;
+}
+.show-more{
+	border-bottom:3px solid #ccccff;
+	padding:10px;
+	margin-bottom:15px;
+	cursor:pointer;
+	color:#ccccff;
+	font-size:12px;
 }

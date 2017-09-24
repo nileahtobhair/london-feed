@@ -22,7 +22,7 @@ class reviews extends Component {
                 <img className='' src={item.image_url} alt='review location'/>
               </div>
               <div className='review-data'>
-                <h4>{item.name}</h4>
+                <h2>{item.name}</h2>
                 <div>Rating <span> {item.rating}</span></div>
                 <div>Number of Reviews <span> {item.review_count}</span></div>
                 <div>Phone Number<span> {item.display_phone}</span></div>
@@ -35,7 +35,7 @@ class reviews extends Component {
         : 
         <span>
           { this.props.added.length > 0 ?
-            <a onClick={ (e) => this.props.show_more()}>Show {this.props.added.length} more</a> 
+            <div className='show-more' onClick={ (e) => this.props.show_more()}>Show {this.props.added.length} more</div> 
           : null }
         </span>
         }
@@ -47,7 +47,7 @@ class reviews extends Component {
                 <img className='' src={item.image_url} alt='review location'/>
               </div>
               <div className='review-data'>
-                <h4>{item.name}</h4>
+                <h2>{item.name}</h2>
                 <div>Rating <span> {item.rating}</span></div>
                 <div>Number of Reviews <span> {item.review_count}</span></div>
                 <div>Phone Number<span> {item.display_phone}</span></div>

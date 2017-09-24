@@ -9,7 +9,6 @@ class App extends Component {
 
   constructor(props){
     super();
-    this.get_api_load_data();
     this.state = {
       visible_tab : 'updates',
       travel : [],
@@ -19,6 +18,7 @@ class App extends Component {
       cats : [],
       added_cats :[]
     }
+    this.get_api_load_data();
   }
 
   show_more_reviews = () => {
@@ -71,6 +71,18 @@ class App extends Component {
     this.setState( {visible_tab : change_to });
   }
 
+  _render_menu(){
+    var update_active = this.state.visible_tab === 'updates' ? 'active' : '';
+    var reviews_active = this.state.visible_tab === 'reviews' ? 'active' : '';
+    var cats_active = this.state.visible_tab === 'cats' ? 'active' : '';
+    return (
+      <div className='menu'>
+        <div className={'tab '+ update_active} onClick={ (e) => this.change_visible_tab('updates')} >Updates</div>   
+        <div className={'tab '+ reviews_active} onClick={ (e) => this.change_visible_tab('reviews')} >Reviews</div>   
+        <div className={'tab '+ cats_active} onClick={ (e) => this.change_visible_tab('cats')} >Cats!</div>
+      </div>
+    );
+  }
   render() {
     var main = this;
     return (
@@ -80,11 +92,7 @@ class App extends Component {
           <h2>London Feed</h2>
         </div>
         <div>
-          <div className='menu'>
-            <div className='tab' onClick={ (e) => main.change_visible_tab('updates')} >Updates</div>   
-            <div className='tab' onClick={ (e) => main.change_visible_tab('reviews')} >Reviews</div>   
-            <div className='tab' onClick={ (e) => main.change_visible_tab('cats')} >Cats</div>
-          </div>
+         {this._render_menu() }
           { main.state.visible_tab === 'updates' ? 
               <Feed added={main.state.added_travel} data={main.state.travel}/>
 
