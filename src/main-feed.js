@@ -3,7 +3,24 @@ import './index.css';
 import moment from 'moment';
 
 class Feed extends Component {
+
+  /* Render relevant information for individual travel update. */
+  _render_travel_update(item,index){
+    return (
+      <span>
+        <img src={item.user.profile_image_url_https} alt='update user profile'/>
+          <div className='information'>
+            <div className='date'>
+              <span className='time'> {moment(item.created_at).format("HH:mm")}</span>
+              { moment(item.created_at).format("DD MMM YY") }
+            </div>
+            <div className='text'>{item.text}</div>
+          </div> 
+      </span>
+    );
+  }
   
+  /* Map intital updated and updates gathered from socket streams separately.*/
   render() {
     return (
       <div className="travel">
@@ -11,14 +28,7 @@ class Feed extends Component {
          { this.props.added.map((item,index)=>{
           return (
             <li className='added-update' key={'added-update'+index}>
-              <img src={item.user.profile_image_url_https} alt='update user profile'/>
-              <div className='information'>
-                <div className='date'>
-                  <span className='time'> {moment(item.created_at).format("HH:mm")}</span>
-                  { moment(item.created_at).format("DD MMM YY") }
-                </div>
-                <div className='text'>{item.text}</div>
-              </div>   
+               {this._render_travel_update(item,index)}
             </li>
           )
         })}
@@ -27,14 +37,7 @@ class Feed extends Component {
         { this.props.data.map((item,index)=>{
           return (
             <li className='update' key={'update'+index}>
-              <img src={item.user.profile_image_url_https} alt='update user profile'/>
-              <div className='information'>
-                <div className='date'>
-                  <span className='time'> {moment(item.created_at).format("HH:mm")}</span>
-                  { moment(item.created_at).format("DD MMM YY") }
-                </div>
-                <div className='text'>{item.text}</div>
-              </div> 
+              {this._render_travel_update(item,index)}
             </li>
           )
         })}

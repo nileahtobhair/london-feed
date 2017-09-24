@@ -15,14 +15,15 @@ class cats extends Component {
         { 
           this.props.added.map((item,index)=>{ 
             return (
-              <img key={'added-cat'+index} src={item.gif_source} alt='a cat gif'/>
+              <a target="_blank" key={'added-cat'+index} href={item.html5_source} ><img src={item.gif_source} alt='a cat gif'/></a>
+            
             );
           })  
        }
         { 
           this.props.data.map((item,index)=>{ 
             return (
-              <img key={'cat'+index} src={item.gif_source} alt='a cat gif'/>
+              <a target="_blank" key={'cat'+index} href={item.html5_source} ><img src={item.gif_source} alt='a cat gif'/></a>
             );
           })  
        }

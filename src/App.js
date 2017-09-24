@@ -40,11 +40,32 @@ class App extends Component {
 
     gifs((err, load) => {
       var new_gifs = main.state.added_cats; new_gifs.unshift(load.data);
-      main.setState({added_cats : new_gifs });
+      var gifs = new_gifs.filter(function(item, pos){
+        return new_gifs.indexOf(item.idx) === pos; 
+      });
+      main.setState({added_cats : gifs });
     });
   }
 
-  
+  star(type,review){
+    var main = this;
+    fetch('http://127.0.0.1:5000/star', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        data_type : type,
+        data_id:  review.id
+      })
+    }).then((response) => response.json())
+    .then((responseJson) => {
+      console.log('got back',responseJson);
+    }).catch((error) => {
+      console.error(error);
+    })
+  }
 
   get_api_load_data(){
     var main = this;
@@ -89,16 +110,16 @@ class App extends Component {
       <div className="App">
         <div className="feed-heading">
           <img src={logo} className="" alt="london skyline" />
-          <h2>London Feed</h2>
+          <h2>The Feed</h2>
         </div>
         <div>
          {this._render_menu() }
           { main.state.visible_tab === 'updates' ? 
-              <Feed added={main.state.added_travel} data={main.state.travel}/>
+              <Feed star={this.star} added={main.state.added_travel} data={main.state.travel}/>
 
           : main.state.visible_tab === 'reviews' ? 
-            <Reviews show_more={this.show_more_reviews} added={main.state.added_reviews} data={main.state.reviews}/> : 
-            <Cats added={main.state.added_cats} data={main.state.cats}/> }
+            <Reviews star={this.star} show_more={this.show_more_reviews} added={main.state.added_reviews} data={main.state.reviews}/> : 
+            <Cats star={this.star} added={main.state.added_cats} data={main.state.cats}/> }
         </div>
       </div>
     );
