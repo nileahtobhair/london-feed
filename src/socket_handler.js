@@ -1,8 +1,12 @@
 import openSocket from 'socket.io-client';
+const server_domain = 'http://127.0.0.1:5000';
+const socket = openSocket(server_domain+'/travel');
+const reviews_socket = openSocket(server_domain+'/reviews');
+const gifs_socket = openSocket(server_domain+'/gifs');
 
-const socket = openSocket('http://localhost:5000/travel');
-const reviews_socket = openSocket('http://localhost:5000/reviews');
-const gifs_socket = openSocket('http://localhost:5000/gifs');
+/* handle messages from respective socket namespaces. 
+  Open socket on page load and send start message when received 
+  connection message.  */
 
 var travel_messages = (handle_travel) => {
   socket.on('message', load => {

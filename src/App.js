@@ -30,7 +30,7 @@ class App extends Component {
     var combined_reviews = this.state.added_reviews.concat(this.state.reviews);
     this.setState({ reviews : combined_reviews,added_reviews : [] });
   }
-
+  /* Handle socket messages on receipt of new item. */
   componentDidMount(){
     var main = this;
     travel_messages((err, load) => {
@@ -44,11 +44,7 @@ class App extends Component {
      });
 
     gifs((err, load) => {
-      console.log('id',load.data.id);
       var new_gifs = main.state.added_cats; new_gifs.unshift(load.data);
-      var gifs = new_gifs.filter(function(item, pos){
-        return new_gifs.indexOf(item.idx) === pos; 
-      });
       main.setState({added_cats : new_gifs });
     });
   }

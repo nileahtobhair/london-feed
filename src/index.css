@@ -9,7 +9,44 @@ ul{
 .App {
   text-align: center;
 }
+.feed-heading {
+	overflow: auto;
+	width:70%;
+	margin: 0 auto;
+}
+.feed-heading img{
+	float:right ;
+	width:70%;
+}
+@media screen and (max-width: 599px) {
+	.App .menu,
+	.App .review-data,
+	.App .feed-heading h2,
+	.App .travel,
+	.gifs,
+	.feed-heading img,
+	.feed-heading{
+		width:100%;
+		float:none;
+	}
+	.App .feed-heading h2{
+		margin-top:5px;
+	}
+	.travel .added-update img{
+		display: none;
+	}
+	.App .review{
+		width:90%;
+	}
+}
+.feed-heading h2{
+	float:left;
+	font-size: 40px;
+	width:20%;
 
+	font-family: monospace;
+	margin-top:70px;
+}
 .menu .tab{
 	cursor: pointer;
 	padding:15px;
