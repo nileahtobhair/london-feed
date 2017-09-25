@@ -9,8 +9,14 @@ The task given is to implement a basic front-end react application to display in
 
 The application is available to view here https://london-feed.herokuapp.com/
 The source is available on GitHub : https://github.com/nileahtobhair/london-feed
+
 Prerequisites create-react-app + yarn . 
-Run : %  yarn install.  % yarn start.
+
+Run : 
+
+%  yarn install. 
+
+% yarn start.
 
 ## Implementation Decisions
 
@@ -28,9 +34,13 @@ Enough information is given in the review data object to allow for multiple sort
 #### Expand on API
 
 Additional functionality for the api would greatly improve the functionality of the project. Getting a single item by id , storing star information, allowing for unstaring etc. Also suggested would be to use the twitter api directly for TFL tweets . Basic tweet displays can be done without 0auth or much implementation. Loading new tweets in real time is handled by the API.
-Captcha/Authentication
+
+####Captcha/Authentication
+
 Currently nothing prevents the user from continuously submitted a POST from for the star functionality. Going forward it would be suggested to only allow signed in users to access the feature or implement a Captcha to confirm user is an authentic user.
-Pagination
+
+####Pagination
+
 Views will be appended continuously with information gathered from the socket endpoints. Pagination or a max number of displayed items would be suggested going forward. 
 Testing 
 I elected not to include testing as this project will not be used and the sample server also did not include testing.
