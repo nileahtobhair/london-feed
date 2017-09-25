@@ -15,7 +15,7 @@ class Feed extends Component {
               { moment(item.created_at).format("DD MMM YY") }
             </div>
             <div className='text'>{item.text}</div>
-            <div className='star' onClick={ (e) => this.props.star('travel',item.id_str)} > Star this item</div>
+            <div className='star' onClick={ (e) => this.props.star('travel',item.id_str,item)} > Star this item</div>
           </div> 
       </span>
     );

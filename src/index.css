@@ -165,7 +165,23 @@ ul{
 	cursor:pointer;
 	color:#e6e600;
 }
+.favs{
+	width:70%;
+	margin:0 auto;
+	padding-top:10px;
+	overflow: auto;
+}
 .rating{
 	font-size:30px;
 	font-family: monospace;
+}
+.fav-item {
+	border-bottom:1px solid black;
+	display: block;
+	padding:10px 0;
+}
+.fav-title{
+	margin-right:5px;
+	font-weight: 800;
+	font-size: 16px;
 }

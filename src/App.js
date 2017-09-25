@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './skyline.png';
 import Feed from './main-feed.js';
 import Cats from './cats.js';
+import Favs from './favs.js';
 import Reviews from './reviews.js';
 import { travel_messages , reviews, gifs } from './socket_handler.js';
 const server_domain = 'http://127.0.0.1:5000';
@@ -17,7 +18,8 @@ class App extends Component {
       reviews : [],
       added_reviews : [],
       cats : [],
-      added_cats :[]
+      added_cats :[],
+      favs : []
     }
     this.get_api_load_data();
   }
@@ -49,7 +51,8 @@ class App extends Component {
     });
   }
   /* Star item, function passed to tab components and called from within components */
-  star(type,id){
+  star = (type,id,item) => {
+    var main = this;
     fetch(server_domain+'/star', {
       method: 'POST',
       headers: {
@@ -62,7 +65,11 @@ class App extends Component {
       })
     }).then((response) => response.json())
     .then((responseJson) => {
-      console.log('got back',responseJson);
+      if(responseJson && responseJson.success){
+        item.type = type;
+        var fav = main.state.favs;fav.unshift(item);
+        main.setState({favs : fav});
+      }
     }).catch((error) => {
       console.error(error);
     })
@@ -100,11 +107,13 @@ class App extends Component {
     var update_active = this.state.visible_tab === 'updates' ? 'active' : '';
     var reviews_active = this.state.visible_tab === 'reviews' ? 'active' : '';
     var cats_active = this.state.visible_tab === 'cats' ? 'active' : '';
+    var favs_active = this.state.visible_tab === 'favs' ? 'active' : '';
     return (
       <div className='menu'>
         <div className={'tab '+ update_active} onClick={ (e) => this.change_visible_tab('updates')} >Updates</div>   
         <div className={'tab '+ reviews_active} onClick={ (e) => this.change_visible_tab('reviews')} >Reviews</div>   
         <div className={'tab '+ cats_active} onClick={ (e) => this.change_visible_tab('cats')} >Cats!</div>
+        <div className={'tab '+ favs_active} onClick={ (e) => this.change_visible_tab('favs')} >Favs</div>
       </div>
     );
   }
@@ -119,6 +128,8 @@ class App extends Component {
         return (<Reviews star={this.star} show_more={this.show_more_reviews} added={this.state.added_reviews} data={main.state.reviews}/>);
       case 'cats' : 
         return (<Cats star={this.star} added={this.state.added_cats} data={this.state.cats}/>);
+      case 'favs' : 
+        return (<Favs data={this.state.favs}/>);
       default:
         return (<Feed star={this.star} added={this.state.added_travel} data={this.state.travel}/>)
     }

@@ -15,7 +15,7 @@ class reviews extends Component {
           <div><span className='rating'> {item.rating}</span></div>
           <div><span> {item.display_phone}</span></div>
           <div><a target="_blank" href={item.url}>URL</a></div>
-          <div className='star' onClick={ (e) => this.props.star('reviews',item.id)} > Star this item</div>
+          <div className='star' onClick={ (e) => this.props.star('reviews',item.id,item)} > Star this item</div>
         </div>
       </span>     
     )
