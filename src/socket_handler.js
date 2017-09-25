@@ -1,5 +1,6 @@
 import openSocket from 'socket.io-client';
-const server_domain = 'http://127.0.0.1:5000';
+//const server_domain = 'http://127.0.0.1:5000';
+const server_domain = 'https://the-london-feed.herokuapp.com';
 const socket = openSocket(server_domain+'/travel');
 const reviews_socket = openSocket(server_domain+'/reviews');
 const gifs_socket = openSocket(server_domain+'/gifs');

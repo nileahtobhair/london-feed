@@ -5,7 +5,8 @@ import Cats from './cats.js';
 import Favs from './favs.js';
 import Reviews from './reviews.js';
 import { travel_messages , reviews, gifs } from './socket_handler.js';
-const server_domain = 'http://127.0.0.1:5000';
+//const server_domain = 'http://127.0.0.1:5000';
+const server_domain = 'https://the-london-feed.herokuapp.com';
 
 class App extends Component {
 
