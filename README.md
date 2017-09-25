@@ -31,15 +31,16 @@ There is a couple of things that I felt were beyond the scope of what I felt was
 #### Sort by for reviews 
 
 Enough information is given in the review data object to allow for multiple sort by (price , location , type of food , etc) which could improve user experience. I felt it was a little beyond the scope of this project but could be implemented on the front-end with JS array sort.
+
 #### Expand on API
 
 Additional functionality for the api would greatly improve the functionality of the project. Getting a single item by id , storing star information, allowing for unstaring etc. Also suggested would be to use the twitter api directly for TFL tweets . Basic tweet displays can be done without 0auth or much implementation. Loading new tweets in real time is handled by the API.
 
-####Captcha/Authentication
+#### Captcha/Authentication
 
 Currently nothing prevents the user from continuously submitted a POST from for the star functionality. Going forward it would be suggested to only allow signed in users to access the feature or implement a Captcha to confirm user is an authentic user.
 
-####Pagination
+#### Pagination
 
 Views will be appended continuously with information gathered from the socket endpoints. Pagination or a max number of displayed items would be suggested going forward. 
 Testing 
