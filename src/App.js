@@ -4,6 +4,7 @@ import Feed from './main-feed.js';
 import Cats from './cats.js';
 import Reviews from './reviews.js';
 import { travel_messages , reviews, gifs } from './socket_handler.js';
+const server_domain = 'http://127.0.0.1:5000';
 
 class App extends Component {
 
@@ -43,17 +44,17 @@ class App extends Component {
      });
 
     gifs((err, load) => {
+      console.log('id',load.data.id);
       var new_gifs = main.state.added_cats; new_gifs.unshift(load.data);
       var gifs = new_gifs.filter(function(item, pos){
         return new_gifs.indexOf(item.idx) === pos; 
       });
-      main.setState({added_cats : gifs });
+      main.setState({added_cats : new_gifs });
     });
   }
-  /* Star ite, - function passed to sub components and called */
+  /* Star item, function passed to tab components and called from within components */
   star(type,id){
-    var main = this;
-    fetch('http://127.0.0.1:5000/star', {
+    fetch(server_domain+'/star', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -71,10 +72,10 @@ class App extends Component {
     })
   }
 
-  /* Get inital data from server - assign to state variable */
+  /* Get inital data from server + assign to state variable */
   get_api_load_data(){
     var main = this;
-    fetch('http://127.0.0.1:5000/sync', {
+    fetch(server_domain+'/sync', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -112,9 +113,23 @@ class App extends Component {
     );
   }
 
-  /* Render common heading and relevant tab component specified in state variable */
-  render() {
+  /* Render currently visible componenet tab */
+  _render_current_tab(){
     var main = this;
+    switch(this.state.visible_tab){
+      case 'updates':
+        return (<Feed star={this.star} added={this.state.added_travel} data={this.state.travel}/>)
+      case 'reviews': 
+        return (<Reviews star={this.star} show_more={this.show_more_reviews} added={this.state.added_reviews} data={main.state.reviews}/>);
+      case 'cats' : 
+        return (<Cats star={this.star} added={this.state.added_cats} data={this.state.cats}/>);
+      default:
+        return (<Feed star={this.star} added={this.state.added_travel} data={this.state.travel}/>)
+    }
+  }
+
+  
+  render() {
     return (
       <div className="App">
         <div className="feed-heading">
@@ -122,14 +137,8 @@ class App extends Component {
           <h2>The Feed</h2>
         </div>
         <div>
-         {this._render_menu() }
-          { main.state.visible_tab === 'updates' ? 
-              <Feed star={this.star} added={main.state.added_travel} data={main.state.travel}/>
-          : main.state.visible_tab === 'reviews' ? 
-            <Reviews star={this.star} show_more={this.show_more_reviews} added={main.state.added_reviews} data={main.state.reviews}/>
-          : 
-            <Cats star={this.star} added={main.state.added_cats} data={main.state.cats}/> 
-          }
+         { this._render_menu() }
+         { this._render_current_tab() }
         </div>
       </div>
     );

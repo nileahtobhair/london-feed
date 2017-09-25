@@ -32,6 +32,9 @@ ul{
 	text-align:left;
 	float:right;
 }
+.review-data h2{
+	margin: 0;
+}
 .review-item{
 	overflow: auto;
 	margin-bottom:15px;
@@ -124,4 +127,8 @@ ul{
 	margin-top:5px;
 	cursor:pointer;
 	color:#e6e600;
+}
+.rating{
+	font-size:30px;
+	font-family: monospace;
 }
