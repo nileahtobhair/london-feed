@@ -43,5 +43,7 @@ Currently nothing prevents the user from continuously submitted a POST from for 
 #### Pagination
 
 Views will be appended continuously with information gathered from the socket endpoints. Pagination or a max number of displayed items would be suggested going forward. 
-Testing 
+
+#### Testing 
+
 I elected not to include testing as this project will not be used and the sample server also did not include testing.
